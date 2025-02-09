@@ -3,6 +3,12 @@ from typing import List, Tuple, Optional
 
 class SaddlePointFinder:
     def __init__(self, payoff_matrix: List[List[float]]):
+        """
+        Initialize the SaddlePointFinder with a payoff matrix.
+        
+        Args:
+            payoff_matrix (List[List[float]]): The payoff matrix for Player A
+        """
         self.payoff_matrix = np.array(payoff_matrix)
         self.rows, self.cols = self.payoff_matrix.shape
         
@@ -11,18 +17,29 @@ class SaddlePointFinder:
             raise ValueError("Matrix must have dimensions m × n where m > 1 and n > 1")
 
     def find_row_minimums(self) -> np.ndarray:
+        """Find the minimum value in each row."""
         return np.min(self.payoff_matrix, axis=1)
 
     def find_column_maximums(self) -> np.ndarray:
+        """Find the maximum value in each column."""
         return np.max(self.payoff_matrix, axis=0)
 
     def find_maximin(self) -> float:
+        """Calculate the maximin value (maximum of row minimums)."""
         return np.max(self.find_row_minimums())
 
     def find_minimax(self) -> float:
+        """Calculate the minimax value (minimum of column maximums)."""
         return np.min(self.find_column_maximums())
 
     def find_saddle_points(self) -> List[Tuple[int, int, float]]:
+        """
+        Find all saddle points in the payoff matrix.
+        
+        Returns:
+            List[Tuple[int, int, float]]: List of tuples containing (row, column, value)
+                                        for each saddle point found
+        """
         maximin = self.find_maximin()
         minimax = self.find_minimax()
         
@@ -47,6 +64,12 @@ class SaddlePointFinder:
         return saddle_points
 
     def analyze_game(self) -> str:
+        """
+        Analyze the game and return a detailed report.
+        
+        Returns:
+            str: A detailed analysis of the game including saddle points if they exist
+        """
         saddle_points = self.find_saddle_points()
         maximin = self.find_maximin()
         minimax = self.find_minimax()
@@ -84,3 +107,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    
