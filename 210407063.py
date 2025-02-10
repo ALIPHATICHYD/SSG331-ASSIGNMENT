@@ -1,5 +1,5 @@
 import numpy as np
-from typing import List, Tuple, Optional
+from typing import List, Tuple
 
 class SaddlePointFinder:
     def __init__(self, payoff_matrix: List[List[float]]):
