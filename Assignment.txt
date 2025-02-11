@@ -1,6 +1,3 @@
-import numpy as np
-from typing import List, Tuple, Optional
-
 class SaddlePointFinder:
     def __init__(self, payoff_matrix: List[List[float]]):
         """
@@ -87,24 +84,3 @@ class SaddlePointFinder:
             report.append("\nThis game has a pure strategy equilibrium.")
         
         return "\n".join(report)
-
-def main():
-    # Example usage
-    payoff_matrix = [
-        [3, 2, 4],
-        [1, 4, 2],
-        [2, 3, 1]
-    ]
-    
-    try:
-        game = SaddlePointFinder(payoff_matrix)
-        print("Payoff Matrix:")
-        print(game.payoff_matrix)
-        print("\n" + game.analyze_game())
-        
-    except ValueError as e:
-        print(f"Error: {e}")
-
-if __name__ == "__main__":
-    main()
-    
