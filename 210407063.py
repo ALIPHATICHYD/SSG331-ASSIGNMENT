@@ -6,7 +6,6 @@ class SaddlePointFinder:
         self.payoff_matrix = np.array(payoff_matrix)
         self.rows, self.cols = self.payoff_matrix.shape
         
-        # Validate input dimensions
         if self.rows <= 1 or self.cols <= 1:
             raise ValueError("Matrix must have dimensions m × n where m > 1 and n > 1")
 
@@ -26,18 +25,14 @@ class SaddlePointFinder:
         maximin = self.find_maximin()
         minimax = self.find_minimax()
         
-        # If maximin != minimax, no saddle point exists
         if maximin != minimax:
             return []
         
-        saddle_points = []
-        
-        # Find all positions where the value equals both maximin and minimax
+        saddle_points = [] 
+    
         for i in range(self.rows):
             for j in range(self.cols):
                 value = self.payoff_matrix[i, j]
-                
-                # Check if this position is a row minimum and column maximum
                 is_row_min = value == np.min(self.payoff_matrix[i, :])
                 is_col_max = value == np.max(self.payoff_matrix[:, j])
                 
